@@ -1,0 +1,42 @@
+{% extends 'students/base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Profile</h5>
+                    {% if student_profile %}
+                        <p><strong>Name:</strong> {{ student_profile.user.get_full_name }}</p>
+                        <p><strong>Enrollment No:</strong> {{ student_profile.enrollment_number }}</p>
+                        <p><strong>Email:</strong> {{ student_profile.user.email }}</p>
+                        <p><strong>Date of Birth:</strong> {{ student_profile.date_of_birth }}</p>
+                        <p><strong>Address:</strong> {{ student_profile.address }}</p>
+                        <p><strong>Phone:</strong> {{ student_profile.phone }}</p>
+                    {% else %}
+                        <p>No profile found.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Enrolled Courses</h5>
+                    {% if enrollments %}
+                        <ul class="list-group">
+                        {% for enrollment in enrollments %}
+                            <li class="list-group-item">
+                                {{ enrollment.course.name }} ({{ enrollment.course.code }})
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>No courses enrolled.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
